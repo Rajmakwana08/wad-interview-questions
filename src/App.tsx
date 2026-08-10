@@ -2082,6 +2082,95 @@ ListBox, CheckBoxList, RadioButtonList, and BulletedList.
 
 These controls simplify data display, improve user
 interaction, and support server-side processing.
+
+
+
+
+RadioButton vs RadioButtonList
+
+
+| Feature      | RadioButton                            | RadioButtonList                             |
+| ------------ | -------------------------------------- | ------------------------------------------- |
+| Selection    | Usually one option within a group      | Only one option                             |
+| Options      | You create each RadioButton separately | Multiple options are managed in one control |
+| Grouping     | Need GroupName                         | Automatically grouped                       |
+| Data binding | Not convenient                         | Supports data binding                       |
+| Code         | More code                              | Less code                                   |
+| Example      | Male / Female using separate controls  | Gender list using one control               |
+
+
+RadioButton example:
+
+<asp:RadioButton ID="rbMale" runat="server"
+    Text="Male" GroupName="Gender" />
+
+<asp:RadioButton ID="rbFemale" runat="server"
+    Text="Female" GroupName="Gender" />
+
+Here, GroupName="Gender" makes sure only one can be selected.
+
+
+RadioButtonList example:
+
+<asp:RadioButtonList ID="rblGender" runat="server">
+    <asp:ListItem>Male</asp:ListItem>
+    <asp:ListItem>Female</asp:ListItem>
+    <asp:ListItem>Other</asp:ListItem>
+</asp:RadioButtonList>
+
+Here, the whole list is handled by one control.
+
+
+
+2. CheckBox vs CheckBoxList
+
+| Feature      | CheckBox               | CheckBoxList                    |
+| ------------ | ---------------------- | ------------------------------- |
+| Selection    | Individual checkbox    | Multiple options from a list    |
+| Options      | One option per control | Multiple options in one control |
+| Grouping     | Not required           | All options managed together    |
+| Data binding | Not convenient         | Supports data binding           |
+| Example      | "I agree to terms"     | Selecting multiple hobbies      |
+
+
+CheckBox example:
+
+<asp:CheckBox ID="chkTerms" runat="server"
+    Text="I agree to the terms" />
+
+A user can check or uncheck it independently.
+
+
+CheckBoxList example:
+
+<asp:CheckBoxList ID="cblHobbies" runat="server">
+    <asp:ListItem>Cricket</asp:ListItem>
+    <asp:ListItem>Music</asp:ListItem>
+    <asp:ListItem>Reading</asp:ListItem>
+    <asp:ListItem>Coding</asp:ListItem>
+</asp:CheckBoxList>
+
+The user can select multiple hobbies.
+
+
+Easy way to remember
+
+RadioButton → One individual option
+RadioButtonList → List of options, select only one
+CheckBox → One individual option, independently checked
+CheckBoxList → List of options, select multiple
+
+
+Example:
+
+  Gender: → RadioButtonList → 🟢 Male / ⚪ Female / ⚪ Other
+  Hobbies: → CheckBoxList → ☑ Coding / ☑ Music / ☐ Cricket
+
+So the most important difference is:
+
+  RadioButton/RadioButtonList = single selection
+  CheckBox/CheckBoxList = multiple selection
+
       `
     },
     {
