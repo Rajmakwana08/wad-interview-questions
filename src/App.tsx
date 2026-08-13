@@ -6296,22 +6296,153 @@ are Menu, TreeView, and SiteMapPath.
       codeExample: ``
     },
     {
-      id: 1,
-      question: "1. ",
+      id: 1.1,
+      question: "1. Registration Page",
       answer: "",
-      codeExample: ``
+      codeExample: `
+ASP.NET Frontend Code (Registration.aspx):
+
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Registration.aspx.cs" Inherits="Registration" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>User Registration</title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div style="text-align:center">
+            <h2>User Registration Form</h2>
+
+            Name: <asp:TextBox ID="txtName" runat="server" /><br /><br />
+            DOB: <asp:TextBox ID="txtDOB" runat="server" /><br /><br />
+            Gender: 
+            <asp:RadioButton ID="rdoMale" GroupName="Gender" Text="Male" runat="server" />
+            <asp:RadioButton ID="rdoFemale" GroupName="Gender" Text="Female" runat="server" /><br /><br />
+            Email: <asp:TextBox ID="txtEmail" runat="server" /><br /><br />
+            Contact No: <asp:TextBox ID="txtContact" runat="server" /><br /><br />
+
+            <asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click" /><br /><br />
+
+            <asp:Label ID="lblResult" runat="server" Font-Bold="true" ForeColor="Blue" />
+        </div>
+    </form>
+</body>
+</html>
+
+
+Code-Behind (Registration.aspx.cs):
+
+using System;
+
+public partial class Registration : System.Web.UI.Page
+{
+    protected void btnSubmit_Click(object sender, EventArgs e)
+    {
+        string name = txtName.Text;
+        string dob = txtDOB.Text;
+        string gender = rdoMale.Checked ? "Male" : "Female";
+        string email = txtEmail.Text;
+        string contact = txtContact.Text;
+
+        lblResult.Text = "Registration Details:<br/>" +
+                         "Name: " + name + "<br/>" +
+                         "DOB: " + dob + "<br/>" +
+                         "Gender: " + gender + "<br/>" +
+                         "Email: " + email + "<br/>" +
+                         "Contact No: " + contact;
+    }
+}
+
+
+      `
     },
     {
-      id: 1,
-      question: "1. ",
+      id: 2.2,
+      question: "2. Introduction to Master Page like home, about, contact page",
       answer: "",
-      codeExample: ``
+      codeExample: `
+ASP.NET Master Page Code (Site.master):
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <title>Master Page Demo</title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div style="background-color:lightgray; padding:10px;">
+            <h2>My Website</h2>
+            <a href="Home.aspx">Home</a> |
+            <a href="About.aspx">About Us</a> |
+            <a href="Contact.aspx">Contact</a>
+        </div>
+        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+        </asp:ContentPlaceHolder>
+    </form>
+</body>
+</html>
+
+
+ASP.NET Content Page Code (Home.aspx):
+
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <h3>Welcome to the Home Page</h3>
+    <p>This is the default content for the home page.</p>
+</asp:Content>
+
+
+      
+      
+      `
     },
     {
-      id: 1,
-      question: "1. ",
+      id: 3.3,
+      question: "3. Use of Master Page and Session used session to create login and signup page",
       answer: "",
-      codeExample: ``
+      codeExample: `
+  Master Page Navigation (Site.master):
+
+<asp:Menu ID="NavigationMenu" runat="server" Orientation="Horizontal">
+    <Items>
+        <asp:MenuItem Text="Registration" NavigateUrl="~/Registration.aspx" />
+        <asp:MenuItem Text="Login" NavigateUrl="~/Login.aspx" />
+    </Items>
+</asp:Menu>
+
+
+Login Button Click Event (Login.aspx.cs):
+
+protected void btnLogin_Click(object sender, EventArgs e)
+{
+    if(txtUsername.Text == "admin" && txtPassword.Text == "1234")
+    {
+        Session["User"] = txtUsername.Text;
+        Response.Redirect("Welcome.aspx");
+    }
+    else
+    {
+        lblMessage.Text = "Invalid login credentials.";
+    }
+}
+
+
+Displaying Session User (Welcome.aspx.cs):
+
+protected void Page_Load(object sender, EventArgs e)
+{
+    if(Session["User"] != null)
+    {
+        lblWelcome.Text = "Welcome, " + Session["User"].ToString();
+    }
+    else
+    {
+        Response.Redirect("Login.aspx");
+    }
+}
+
+
+      `
     },
     {
       id: 1,
