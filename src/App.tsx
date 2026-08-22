@@ -6266,10 +6266,534 @@ are Menu, TreeView, and SiteMapPath.
       codeExample: ``
     },
     {
-      id: 1,
-      question: "1. ",
+      id: 11111,
+      question: "Mid paper solutions",
       answer: "",
-      codeExample: ``
+      codeExample: `
+===========================================================
+WEB APPLICATION DEVELOPMENT / ASP.NET
+MID-TERM EXAMINATION – IMPORTANT ANSWERS
+===========================================================
+
+
+Q.1 (a) SHORT QUESTIONS – 1 MARK
+===========================================================
+
+Q1. What process in the CLR is responsible for memory management?
+
+Answer:
+
+The Garbage Collector (GC) is responsible for memory management
+in the CLR.
+
+It automatically:
+- Allocates memory for objects.
+- Removes unused objects.
+- Frees memory when objects are no longer required.
+
+
+-----------------------------------------------------------
+
+Q2. What is the primary function of a ListBox control?
+
+Answer:
+
+The ListBox control is used to display a list of items from
+which the user can select one or more items.
+
+Example:
+
+ListBox:
+    Apple
+    Mango
+    Orange
+    Banana
+
+
+-----------------------------------------------------------
+
+Q3. What method is used to set a cookie in ASP.NET?
+
+Answer:
+
+The Response.Cookies collection is used to create/set a cookie
+in ASP.NET.
+
+Example:
+
+Response.Cookies["username"].Value = "Raj";
+
+
+
+===========================================================
+Q.1 (b) MCQs – 1 MARK
+===========================================================
+
+Q1. What is the main purpose of a Button control in ASP.NET?
+
+(A) To submit data to the server
+(B) To display data
+(C) To store data
+(D) To validate data
+
+Answer:
+(A) To submit data to the server
+
+
+-----------------------------------------------------------
+
+Q2. The Master Page in ASP.NET is used to:
+
+Answer:
+
+To define a common layout/design for multiple web pages.
+
+Example:
+
+Master Page
+    |
+    |-- Header
+    |-- Menu
+    |-- Content
+    |-- Footer
+
+All content pages can use the same layout.
+
+
+===========================================================
+Q.2 (a) – 2/3 MARK QUESTIONS
+===========================================================
+
+Q1. What is method overloading in C#?
+
+Answer:
+
+Method overloading means defining multiple methods with the
+same name but with different parameters.
+
+Example:
+
+class Calculator
+{
+    int Add(int a, int b)
+    {
+        return a + b;
+    }
+
+    int Add(int a, int b, int c)
+    {
+        return a + b + c;
+    }
+}
+
+Here, both methods have the same name Add(), but different
+number of parameters.
+
+Advantages:
+1. Improves code readability.
+2. Allows the same operation with different inputs.
+
+
+-----------------------------------------------------------
+
+Q2. Explain the role of the Just-in-Time (JIT) compiler in .NET.
+
+Answer:
+
+JIT stands for Just-In-Time compiler.
+
+The JIT compiler converts Intermediate Language (IL/MSIL)
+code into machine code at runtime.
+
+Working:
+
+C# Source Code
+      ↓
+C# Compiler
+      ↓
+IL / MSIL Code
+      ↓
+JIT Compiler
+      ↓
+Machine Code
+      ↓
+CPU Execution
+
+Advantages:
+1. Improves execution speed.
+2. Converts only required code into machine code.
+3. Provides platform-specific machine code.
+
+
+-----------------------------------------------------------
+
+Q3. What are the key features of System.Linq namespace?
+
+Answer:
+
+System.Linq provides Language Integrated Query (LINQ).
+
+Main features:
+1. Query collections easily.
+2. Filtering using Where().
+3. Sorting using OrderBy().
+4. Selecting data using Select().
+5. Grouping data using GroupBy().
+
+Example:
+
+var result = numbers.Where(x => x > 10);
+
+
+-----------------------------------------------------------
+
+Q4. How can you handle unhandled exceptions in Global.asax?
+
+Answer:
+
+Unhandled exceptions can be handled using the
+Application_Error() method in Global.asax.
+
+Example:
+
+protected void Application_Error(object sender, EventArgs e)
+{
+    Exception ex = Server.GetLastError();
+
+    // Handle or log the exception
+
+    Server.ClearError();
+}
+
+Purpose:
+- Handles unexpected errors.
+- Logs error information.
+- Prevents application from showing unwanted error pages.
+
+
+-----------------------------------------------------------
+
+Q5. What is the RequiredFieldValidator control used for?
+
+Answer:
+
+RequiredFieldValidator is used to check whether a user has
+entered a value in a required input field.
+
+Example:
+
+<asp:TextBox ID="txtName" runat="server"></asp:TextBox>
+
+<asp:RequiredFieldValidator
+    ID="rfvName"
+    runat="server"
+    ControlToValidate="txtName"
+    ErrorMessage="Name is required">
+</asp:RequiredFieldValidator>
+
+It prevents the form from being submitted when the field
+is empty.
+
+
+-----------------------------------------------------------
+
+Q6. How did .NET Core differ from the original .NET Framework
+   in terms of architecture?
+
+Answer:
+
+.NET Framework:
+- Mainly designed for Windows.
+- Large and monolithic framework.
+- Less suitable for cross-platform development.
+
+.NET Core:
+- Cross-platform.
+- Modular architecture.
+- Lightweight.
+- Supports Windows, Linux and macOS.
+- Better suited for modern cloud and web applications.
+
+In short:
+
+.NET Framework → Mainly Windows
+
+.NET Core → Cross-platform + Modular + Lightweight
+
+
+
+===========================================================
+Q.3 – 5 MARK QUESTIONS
+===========================================================
+
+Q1. Create a basic site navigation structure using a
+    Web.sitemap file in ASP.NET.
+
+Answer:
+
+Web.sitemap is used to define the navigation structure of
+an ASP.NET website.
+
+Example Web.sitemap:
+
+<?xml version="1.0" encoding="utf-8" ?>
+
+<siteMapNode
+    xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0"
+    title="Home"
+    url="~/Home.aspx">
+
+    <siteMapNode
+        title="About"
+        url="~/About.aspx" />
+
+    <siteMapNode
+        title="Products"
+        url="~/Products.aspx">
+
+        <siteMapNode
+            title="Mobile"
+            url="~/Mobile.aspx" />
+
+        <siteMapNode
+            title="Laptop"
+            url="~/Laptop.aspx" />
+
+    </siteMapNode>
+
+    <siteMapNode
+        title="Contact"
+        url="~/Contact.aspx" />
+
+</siteMapNode>
+
+
+Navigation structure:
+
+Home
+ |
+ |-- About
+ |
+ |-- Products
+ |     |
+ |     |-- Mobile
+ |     |-- Laptop
+ |
+ |-- Contact
+
+
+Using SiteMapPath:
+
+<asp:SiteMapPath
+    ID="SiteMapPath1"
+    runat="server">
+</asp:SiteMapPath>
+
+
+Advantages:
+1. Provides website navigation.
+2. Maintains common navigation structure.
+3. Makes navigation easier for users.
+4. Can be used with Menu and SiteMapPath controls.
+
+
+-----------------------------------------------------------
+
+Q2. Analyse how different data types impact memory usage
+    and performance in web applications.
+
+Answer:
+
+Different data types require different amounts of memory.
+Choosing the correct data type improves application
+performance.
+
+1. Value Types:
+   Examples: int, float, double, bool
+
+   They normally store the actual value.
+
+2. Reference Types:
+   Examples: string, array, class, object
+
+   They store a reference to an object.
+
+3. Integer:
+   int is useful for whole numbers and normally requires
+   less memory than larger numeric types.
+
+4. String:
+   Strings may consume more memory because they store
+   characters.
+
+5. Object:
+   object can store different types but may require
+   additional memory and processing.
+
+Example:
+
+int age = 20;
+double salary = 50000.50;
+string name = "Raj";
+bool active = true;
+
+Conclusion:
+
+Using suitable data types:
+- Reduces memory usage.
+- Improves execution speed.
+- Reduces unnecessary memory allocation.
+- Improves overall application performance.
+
+
+-----------------------------------------------------------
+
+Q3. Evaluate the role of CTS in ensuring that .NET
+    applications can interoperate smoothly.
+
+Answer:
+
+CTS stands for Common Type System.
+
+CTS defines how data types are declared, used and managed
+in the .NET environment.
+
+Main roles of CTS:
+
+1. Provides common data types.
+2. Ensures type safety.
+3. Allows different .NET languages to work together.
+4. Defines rules for value types and reference types.
+5. Supports language interoperability.
+
+Example:
+
+C#:
+int age = 20;
+
+VB.NET:
+Dim age As Integer = 20
+
+Both languages use the .NET type system.
+
+Diagram:
+
+C# Application
+      \\
+       \\
+VB.NET Application ---> CTS ---> CLR
+       /
+      /
+F# Application
+
+Conclusion:
+
+CTS allows programs written in different .NET languages
+to understand and use common data types, making
+interoperability easier.
+
+
+-----------------------------------------------------------
+
+Q4. Analyse how the SiteMapPath control improves user
+    experience on a website.
+
+Answer:
+
+SiteMapPath is an ASP.NET navigation control that displays
+the current page location in a website.
+
+Example:
+
+Home > Products > Mobile > Android
+
+This is also called a breadcrumb navigation.
+
+Benefits:
+
+1. Shows the user's current location.
+2. Makes navigation easier.
+3. Allows users to move back to parent pages.
+4. Improves website usability.
+5. Reduces confusion on large websites.
+
+Example:
+
+<asp:SiteMapPath
+    ID="SiteMapPath1"
+    runat="server">
+</asp:SiteMapPath>
+
+Diagram:
+
+Home
+  ↓
+Products
+  ↓
+Mobile
+  ↓
+Android
+
+Displayed as:
+
+Home > Products > Mobile > Android
+
+Conclusion:
+
+SiteMapPath provides a simple and clear navigation path,
+especially for websites having many pages.
+
+
+===========================================================
+IMPORTANT MEMORY TRICK
+===========================================================
+
+Remember these keywords for the exam:
+
+1. CLR Memory
+   → Garbage Collector (GC)
+
+2. ListBox
+   → Display + Select items
+
+3. Cookie
+   → Response.Cookies
+
+4. Button
+   → Submit data to server
+
+5. Master Page
+   → Common layout for multiple pages
+
+6. Method Overloading
+   → Same method name + different parameters
+
+7. JIT
+   → IL → Machine Code at Runtime
+
+8. LINQ
+   → Query collections
+
+9. Global.asax
+   → Application_Error()
+
+10. RequiredFieldValidator
+    → Checks empty field
+
+11. .NET Core
+    → Cross-platform + Modular + Lightweight
+
+12. Web.sitemap
+    → Website navigation structure
+
+13. CTS
+    → Common Type System + Language Interoperability
+
+14. SiteMapPath
+    → Breadcrumb / Current page location
+===========================================================
+      
+      `
     },
     {
       id: 1,
