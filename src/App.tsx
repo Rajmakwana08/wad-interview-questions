@@ -6802,6 +6802,1895 @@ Remember these keywords for the exam:
       codeExample: ``
     },
     {
+      id: 31,
+      question: "31. What is ADO.NET? Explain its basic features.",
+      answer: "",
+      codeExample: `
+What is ADO.NET? Explain its Basic Features
+
+1. What is ADO.NET?
+
+ADO.NET stands for ActiveX Data Objects for .NET.
+
+It is a data access technology in the .NET Framework used to
+connect applications with databases and perform operations such as:
+
+- Insert data
+- Retrieve data
+- Update data
+- Delete data
+
+ADO.NET can work with databases such as SQL Server, Oracle, and
+other data sources through suitable data providers.
+
+Definition:
+
+ADO.NET is a .NET data access technology used to connect
+applications with databases and perform database operations such
+as retrieving, inserting, updating, and deleting data.
+
+
+2. Basic Architecture of ADO.NET
+
+The basic ADO.NET architecture contains two important parts:
+
+        .NET Application
+               |
+               ↓
+        ADO.NET Provider
+        /             \\
+       ↓               ↓
+Connection          DataSet
+Command             DataTable
+DataReader
+       |
+       ↓
+    Database
+
+
+Main Components
+
+
+1. Connection
+
+Used to establish a connection between the application and
+database.
+
+Example:
+
+SqlConnection con =
+    new SqlConnection(connectionString);
+
+
+2. Command
+
+Used to execute SQL queries or stored procedures.
+
+Example:
+
+SqlCommand cmd =
+    new SqlCommand("SELECT * FROM Student", con);
+
+It can execute:
+
+- SELECT
+- INSERT
+- UPDATE
+- DELETE
+
+
+3. DataReader
+
+DataReader is used to read data from the database one record
+at a time.
+
+Example:
+
+SqlDataReader dr = cmd.ExecuteReader();
+
+while (dr.Read())
+{
+    Console.WriteLine(dr["Name"]);
+}
+
+It is generally fast and suitable for read-only, forward-only
+data access.
+
+
+4. DataAdapter
+
+DataAdapter acts as a bridge between the database and DataSet.
+
+Database
+    ↕
+DataAdapter
+    ↕
+DataSet
+
+
+5. DataSet
+
+A DataSet stores data in memory and can contain multiple
+DataTable objects.
+
+DataSet
+   |
+   +--- DataTable 1
+   |
+   +--- DataTable 2
+   |
+   +--- DataTable 3
+
+It allows applications to work with data without keeping the
+database connection continuously open.
+
+
+3. Basic Features of ADO.NET
+
+
+1. Database Connectivity
+
+ADO.NET provides classes for connecting .NET applications
+to databases.
+
+Example:
+
+ASP.NET Application
+       ↓
+    ADO.NET
+       ↓
+    SQL Server
+
+
+2. Disconnected Data Access
+
+One of the important features of ADO.NET is disconnected
+architecture.
+
+Data can be loaded into a DataSet, the connection can then
+be closed, and the application can work with the data in memory.
+
+Database
+   ↓
+DataAdapter
+   ↓
+DataSet
+   ↓
+Connection Closed
+   ↓
+Work with Data
+
+
+3. Supports Multiple Databases
+
+ADO.NET supports different database systems through different
+data providers.
+
+Examples:
+
+- SQL Server → SqlClient
+- ODBC → Odbc
+- OLE DB → OleDb
+
+
+4. Data Manipulation
+
+ADO.NET allows applications to perform:
+
+INSERT
+SELECT
+UPDATE
+DELETE
+
+Example:
+
+INSERT INTO Student VALUES (1, 'Raj');
+
+
+5. DataReader for Fast Data Reading
+
+DataReader provides fast, forward-only reading of database
+records.
+
+Record 1
+   ↓
+Record 2
+   ↓
+Record 3
+   ↓
+Record 4
+
+
+6. DataSet for In-Memory Data
+
+DataSet can store multiple tables and relationships in memory.
+
+This is useful when the application needs to work with data
+after disconnecting from the database.
+
+
+7. XML Support
+
+ADO.NET provides good support for XML, allowing data to be
+represented and exchanged using XML.
+
+
+8. Transaction Support
+
+ADO.NET supports transactions, which help maintain database
+consistency.
+
+Example:
+
+Transaction Start
+      ↓
+Operation 1
+      ↓
+Operation 2
+      ↓
+If successful → COMMIT
+If error      → ROLLBACK
+
+
+9. Connection Pooling
+
+ADO.NET can reuse database connections through connection
+pooling, which can improve application performance.
+
+
+Simple Example
+
+using System.Data.SqlClient;
+
+string cs = "your_connection_string";
+
+SqlConnection con = new SqlConnection(cs);
+
+con.Open();
+
+SqlCommand cmd =
+    new SqlCommand("SELECT * FROM Student", con);
+
+SqlDataReader dr = cmd.ExecuteReader();
+
+while (dr.Read())
+{
+    Console.WriteLine(dr["Name"]);
+}
+
+con.Close();
+
+
+Working:
+
+Create Connection
+      ↓
+Open Connection
+      ↓
+Create Command
+      ↓
+Execute SQL Query
+      ↓
+Read Data using DataReader
+      ↓
+Close Connection
+
+
+Exam Definition — 2 Marks
+
+ADO.NET is a data access technology of the .NET Framework used
+to connect applications with databases and perform operations
+such as SELECT, INSERT, UPDATE, and DELETE.
+      `
+    },
+    {
+      id: 32,
+      question: "32. Explain how to use SQL Data Sources in ASP.NET.",
+      answer: "",
+      codeExample: `
+Using SQL Data Sources in ASP.NET
+
+1. What is SQL Data Source?
+
+SQL Data Source is an ASP.NET data source control used to connect
+an ASP.NET application to a SQL database and perform operations
+such as:
+
+- Select
+- Insert
+- Update
+- Delete
+
+The ASP.NET control commonly used is SqlDataSource.
+
+Definition:
+
+SqlDataSource is an ASP.NET data source control that provides
+connectivity between ASP.NET web applications and SQL databases.
+
+
+2. Why Use SqlDataSource?
+
+It makes database operations easier because we can configure the
+database connection and SQL queries through the control.
+
+It can be connected with controls such as:
+
+- GridView
+- DetailsView
+- FormView
+- DropDownList
+- ListView
+
+Simple Architecture:
+
+ASP.NET Web Page
+       ↓
+ SqlDataSource
+       ↓
+   SQL Query
+       ↓
+ SQL Server Database
+
+
+3. Steps to Use SQL Data Source
+
+
+Step 1: Create a Database
+
+Suppose we have a SQL Server database called CollegeDB.
+
+Table:
+
+Student
+
++----+-------+-----+
+| ID | Name  | Age |
++----+-------+-----+
+| 1  | Raj   | 20  |
+| 2  | Amit  | 21  |
+| 3  | Jay   | 20  |
++----+-------+-----+
+
+
+Step 2: Create Connection String
+
+The connection string contains information required to connect
+to the database.
+
+Example in Web.config:
+
+<connectionStrings>
+    <add name="CollegeDB"
+         connectionString="Data Source=.;Initial Catalog=CollegeDB;Integrated Security=True"
+         providerName="System.Data.SqlClient" />
+</connectionStrings>
+
+Meaning:
+
+- Data Source → SQL Server name
+- Initial Catalog → Database name
+- Integrated Security=True → Uses Windows authentication
+
+
+Step 3: Add SqlDataSource
+
+In an ASP.NET Web Forms page:
+
+<asp:SqlDataSource
+    ID="SqlDataSource1"
+    runat="server"
+    ConnectionString="<%$ ConnectionStrings:CollegeDB %>"
+    SelectCommand="SELECT * FROM Student">
+</asp:SqlDataSource>
+
+Here:
+
+- ID → Name of the control.
+- ConnectionString → Database connection.
+- SelectCommand → SQL query used to retrieve data.
+
+
+Step 4: Display Data Using GridView
+
+We can connect SqlDataSource to a GridView.
+
+<asp:GridView
+    ID="GridView1"
+    runat="server"
+    DataSourceID="SqlDataSource1">
+</asp:GridView>
+
+
+Complete Example:
+
+<asp:SqlDataSource
+    ID="SqlDataSource1"
+    runat="server"
+    ConnectionString="<%$ ConnectionStrings:CollegeDB %>"
+    SelectCommand="SELECT * FROM Student">
+</asp:SqlDataSource>
+
+<asp:GridView
+    ID="GridView1"
+    runat="server"
+    DataSourceID="SqlDataSource1">
+</asp:GridView>
+
+
+Working:
+
+SQL Server
+    ↓
+Student Table
+    ↓
+SqlDataSource
+    ↓
+GridView
+    ↓
+Display Students
+
+
+5. INSERT Operation
+
+SqlDataSource can also be used to insert records.
+
+Example:
+
+<asp:SqlDataSource
+    ID="SqlDataSource1"
+    runat="server"
+    ConnectionString="<%$ ConnectionStrings:CollegeDB %>"
+    InsertCommand="INSERT INTO Student(Name, Age) VALUES (@Name, @Age)">
+
+    <InsertParameters>
+        <asp:Parameter Name="Name" Type="String" />
+        <asp:Parameter Name="Age" Type="Int32" />
+    </InsertParameters>
+
+</asp:SqlDataSource>
+
+Here @Name and @Age are parameters.
+
+
+6. UPDATE Operation
+
+Example:
+
+UpdateCommand="UPDATE Student
+               SET Name=@Name, Age=@Age
+               WHERE ID=@ID"
+
+Parameters are supplied using:
+
+<UpdateParameters>
+    <asp:Parameter Name="Name" />
+    <asp:Parameter Name="Age" Type="Int32" />
+    <asp:Parameter Name="ID" Type="Int32" />
+</UpdateParameters>
+
+
+7. DELETE Operation
+
+Example:
+
+DeleteCommand="DELETE FROM Student WHERE ID=@ID"
+
+Parameter:
+
+<DeleteParameters>
+    <asp:Parameter Name="ID" Type="Int32" />
+</DeleteParameters>
+
+
+8. CRUD Operations
+
+Using SqlDataSource, we can perform CRUD operations:
+
+        SqlDataSource
+             |
+    ┌────────┼────────┐
+    ↓        ↓        ↓
+ SELECT    INSERT   UPDATE
+             |
+           DELETE
+
+
+CRUD Operations:
+
+Operation     Command
+--------------------------------
+Create        InsertCommand
+Read          SelectCommand
+Update        UpdateCommand
+Delete        DeleteCommand
+
+
+Exam Definition — 2 Marks
+
+SqlDataSource is an ASP.NET data source control used to connect
+Web Forms applications with SQL databases and perform SELECT,
+INSERT, UPDATE, and DELETE operations.
+      `
+    },
+    {
+      id: 33,
+      question: "33. Compare GridView, DetailsView, FormView and ListView controls.",
+      answer: "",
+      codeExample: `
+Comparison of GridView, DetailsView, FormView and ListView Controls
+
+These are ASP.NET Web Forms data-bound controls used to display
+and work with data from a database or other data source.
+
+
+1. GridView
+
+GridView displays data in a table/grid format, with multiple
+records shown as rows.
+
+Example:
+
++----+-------+-----+
+| ID | Name  | Age |
++----+-------+-----+
+| 1  | Raj   | 20  |
+| 2  | Amit  | 21  |
+| 3  | Jay   | 20  |
++----+-------+-----+
+
+Features:
+
+- Displays multiple records.
+- Supports sorting.
+- Supports paging.
+- Supports selecting, editing, and deleting records.
+- Commonly used for displaying database tables.
+
+
+2. DetailsView
+
+DetailsView displays one record at a time in a vertical format.
+
+Example:
+
+ID       : 1
+Name     : Raj
+Age      : 20
+Course   : BCA
+
+Features:
+
+- Displays one record at a time.
+- Supports paging between records.
+- Can support insert, edit, and delete operations.
+- Useful for viewing detailed information about one record.
+
+
+3. FormView
+
+FormView displays one record at a time like DetailsView, but
+provides more control over the layout.
+
+The developer creates templates for displaying, editing,
+inserting, etc.
+
+Example:
+
+<asp:FormView ID="FormView1"
+    runat="server"
+    DataSourceID="SqlDataSource1">
+
+    <ItemTemplate>
+        <h3>Student Details</h3>
+        Name: <%# Eval("Name") %><br />
+        Age: <%# Eval("Age") %>
+    </ItemTemplate>
+
+</asp:FormView>
+
+Features:
+
+- Displays one record at a time.
+- Uses templates.
+- Provides flexible/custom layout.
+- Supports different templates for different operations.
+
+
+4. ListView
+
+ListView displays multiple records using templates, giving the
+developer a high level of control over the layout.
+
+Example:
+
+Student 1
+---------
+Name: Raj
+Age : 20
+
+Student 2
+---------
+Name: Amit
+Age : 21
+
+Features:
+
+- Displays multiple records.
+- Uses templates.
+- Highly customizable.
+- Supports paging and sorting with suitable configuration.
+- Can be used to create custom layouts.
+
+
+5. Main Difference
+
+| GridView                       | DetailsView                              | FormView                                  | ListView                                        |
+| ------------------------------ | ---------------------------------------- | ----------------------------------------- | ----------------------------------------------- |
+| Displays multiple records.     | Displays one record.                     | Displays one record.                      | Displays multiple records.                      |
+| Uses table/grid format.        | Uses vertical field format.              | Uses templates.                           | Uses templates.                                 |
+| Easy to use.                   | Easy for detailed single-record display. | More customizable than DetailsView.       | Highly customizable.                            |
+| Supports paging and sorting.   | Supports paging.                         | Supports paging.                          | Supports paging and sorting with configuration. |
+| Suitable for tabular data.     | Suitable for viewing one record.         | Suitable for custom single-record layout. | Suitable for custom multiple-record layout.     |
+| Less layout flexibility.       | Limited layout flexibility.              | High layout flexibility.                  | Very high layout flexibility.                   |
+
+
+6. Easy Example to Remember
+
+Suppose we have 100 students.
+
+
+GridView
+
+Shows many students in a table:
+
+Raj      20
+Amit     21
+Jay      20
+Mehul    22
+...
+
+
+DetailsView
+
+Shows one student:
+
+ID   : 1
+Name : Raj
+Age  : 20
+
+
+FormView
+
+Shows one student with a custom design:
+
+************************
+    Student Details
+************************
+Name : Raj
+Age  : 20
+Course : BCA
+************************
+
+
+ListView
+
+Shows many students with a custom design:
+
+-----------------
+Student: Raj
+Age: 20
+-----------------
+Student: Amit
+Age: 21
+-----------------
+
+
+7. Simple Memory Trick
+
+GridView    → Many + Table
+DetailsView → One + Details
+FormView    → One + Custom Template
+ListView    → Many + Custom Template
+
+
+Exam Definition — 2 Marks
+
+GridView, DetailsView, FormView, and ListView are ASP.NET Web
+Forms data-bound controls used to display and manipulate data.
+
+GridView displays multiple records in tabular form, DetailsView
+displays one record vertically, FormView displays one record
+using templates, and ListView displays multiple records using
+customizable templates.
+      
+      `
+    },
+    {
+      id: 34,
+      question: "34. Explain ObjectDataSource in ASP.NET.",
+      answer: "",
+      codeExample: `
+Suppose you have a Student table in a database:
+
+Student Database
+----------------
+1   Raj
+2   Amit
+3   Rahul
+
+Normally, your ASP.NET page could directly talk to the database.
+
+But with ObjectDataSource, we put one C# class in the middle:
+
+ASP.NET Page
+    ↓
+ObjectDataSource
+    ↓
+C# Class
+    ↓
+Database
+
+Think of ObjectDataSource as a bridge between your ASP.NET page
+and your C# class.
+
+
+Very Simple Example
+
+1. We have a C# class
+
+public class Student
+{
+    public static List<string> GetStudents()
+    {
+        List<string> students = new List<string>();
+
+        students.Add("Raj");
+        students.Add("Amit");
+        students.Add("Rahul");
+
+        return students;
+    }
+}
+
+Here we have a method:
+
+GetStudents()
+
+It gives us:
+
+Raj
+Amit
+Rahul
+
+
+2. Now create ObjectDataSource
+
+<asp:ObjectDataSource
+    ID="ObjectDataSource1"
+    runat="server"
+    TypeName="Student"
+    SelectMethod="GetStudents">
+</asp:ObjectDataSource>
+
+Don't worry about everything. Just remember these two:
+
+TypeName = Student
+     ↓
+Which C# class?
+
+SelectMethod = GetStudents
+     ↓
+Which method should be called?
+
+So ASP.NET understands:
+
+"Go to the Student class and call GetStudents()."
+
+
+3. Connect it to GridView
+
+<asp:GridView
+    ID="GridView1"
+    runat="server"
+    DataSourceID="ObjectDataSource1">
+</asp:GridView>
+
+Now the complete flow is:
+
+GridView
+   ↓
+ObjectDataSource1
+   ↓
+Student class
+   ↓
+GetStudents()
+   ↓
+Raj, Amit, Rahul
+
+So GridView displays:
+
+----------------
+| Student Name |
+----------------
+| Raj          |
+| Amit         |
+| Rahul        |
+----------------
+
+
+What is the main point?
+
+Without ObjectDataSource
+
+ASP.NET Page
+     ↓
+Database
+
+With ObjectDataSource
+
+ASP.NET Page
+     ↓
+ObjectDataSource
+     ↓
+C# Class
+     ↓
+Database
+
+The C# class handles the data work, and ObjectDataSource connects
+that class to the ASP.NET control.
+
+
+Remember this for exam
+
+ObjectDataSource = Bridge between ASP.NET control and C# class.
+
+GridView → ObjectDataSource → C# Class → Database
+
+And:
+
+TypeName     → Class name
+SelectMethod → Get data
+InsertMethod → Insert data
+UpdateMethod → Update data
+DeleteMethod → Delete data
+
+
+One-line exam definition
+
+ObjectDataSource is an ASP.NET control used to connect data-bound
+controls with a C# business class for selecting, inserting,
+updating, and deleting data.
+      
+      `
+    },
+    {
+      id: 41,
+      question: "41. Explain ASP.NET AJAX Extension. What are its advantages?",
+      answer: "",
+      codeExample: `
+ASP.NET AJAX Extension
+
+Let's understand it in very simple words.
+
+
+1. What is ASP.NET AJAX?
+
+ASP.NET AJAX is a set of extensions for ASP.NET that allows a web
+page to update part of the page without refreshing the entire page.
+
+AJAX stands for:
+
+Asynchronous JavaScript and XML
+
+
+Normal website
+
+Click Button
+     ↓
+Server
+     ↓
+Whole page reloads
+
+
+ASP.NET AJAX
+
+Click Button
+     ↓
+Server
+     ↓
+Only required part changes
+     ↓
+No full page refresh
+
+This makes the website feel faster and smoother.
+
+
+2. Simple Example
+
+Suppose we have this page:
+
+--------------------------------
+|       Student Information     |
+|                              |
+| Name: Raj                    |
+|                              |
+| [ Get Result ]               |
+|                              |
+| Result:                      |
+--------------------------------
+
+
+Without AJAX:
+
+Click "Get Result"
+        ↓
+Entire page reloads
+        ↓
+Result displayed
+
+
+With ASP.NET AJAX:
+
+Click "Get Result"
+        ↓
+Only "Result" section updates
+        ↓
+Other page remains unchanged
+
+
+3. Important ASP.NET AJAX Controls
+
+1. ScriptManager
+
+ScriptManager manages AJAX functionality on the ASP.NET page.
+
+<asp:ScriptManager
+    ID="ScriptManager1"
+    runat="server" />
+
+
+2. UpdatePanel
+
+UpdatePanel specifies the part of the page that should be updated
+without refreshing the complete page.
+
+<asp:UpdatePanel
+    ID="UpdatePanel1"
+    runat="server">
+
+    <ContentTemplate>
+
+        <asp:Label
+            ID="Label1"
+            runat="server"
+            Text="Hello">
+        </asp:Label>
+
+        <asp:Button
+            ID="Button1"
+            runat="server"
+            Text="Click Me" />
+
+    </ContentTemplate>
+
+</asp:UpdatePanel>
+
+Here, when the button is clicked, the UpdatePanel area can be
+updated without a complete page refresh.
+
+
+4. Main Components
+
+ASP.NET AJAX
+     |
+     +---- ScriptManager
+     |
+     +---- UpdatePanel
+     |
+     +---- UpdateProgress
+     |
+     +---- Timer
+
+
+ScriptManager
+
+Manages AJAX scripts.
+
+
+UpdatePanel
+
+Updates only a specific part of the page.
+
+
+UpdateProgress
+
+Shows a message while an AJAX request is running.
+
+Example:
+
+Please wait...
+Loading...
+
+
+Timer
+
+Performs operations at regular time intervals.
+
+
+5. Advantages of ASP.NET AJAX
+
+1. No full page refresh
+
+Only the required portion of the page is updated.
+
+
+2. Faster response
+
+Less information needs to be refreshed, so the application can feel
+faster.
+
+
+3. Better user experience
+
+The user can continue viewing the page while a small part is updated.
+
+
+4. Reduces server traffic
+
+Only required information is exchanged instead of refreshing the
+complete page.
+
+
+5. Easy to implement
+
+ASP.NET provides controls such as ScriptManager and UpdatePanel,
+making AJAX easier to use.
+
+
+6. Supports asynchronous communication
+
+The browser can communicate with the server without waiting for a
+complete page reload.
+      `
+    },
+    {
+      id: 42,
+      question: "42. What is LINQ? Explain LINQ and its advantages in ASP.NET.",
+      answer: "",
+      codeExample: `
+LINQ in ASP.NET
+
+Let's understand LINQ in very simple words.
+
+
+1. What is LINQ?
+
+LINQ stands for:
+
+Language Integrated Query
+
+LINQ is a feature of .NET that allows us to query and manipulate
+data using C# syntax.
+
+In simple words:
+
+LINQ helps us search, filter, sort, and select data easily using
+C# code.
+
+
+2. Why do we need LINQ?
+
+Suppose we have a list of students:
+
+Students
+----------------
+Raj       80
+Amit      65
+Rahul     90
+Jay       55
+
+Suppose we want only students who scored more than 70.
+
+Without LINQ, we may need a loop:
+
+foreach (Student s in students)
+{
+    if (s.Marks > 70)
+    {
+        // use student
+    }
+}
+
+With LINQ, we can write:
+
+var result = students.Where(s => s.Marks > 70);
+
+That's much shorter.
+
+
+3. How LINQ Works
+
+Think of LINQ as a filter/search tool.
+
+All Data
+   ↓
+   LINQ
+   ↓
+Filter / Sort / Search
+   ↓
+Required Data
+
+Example:
+
+Students
+   ↓
+LINQ
+   ↓
+Marks > 70
+   ↓
+Raj, Rahul
+
+
+4. Simple LINQ Example
+
+Suppose we have:
+
+List<int> marks = new List<int>
+{
+    50, 80, 65, 90, 40
+};
+
+We want marks greater than 60.
+
+var result = marks.Where(x => x > 60);
+
+
+Step-by-step:
+
+50 > 60 ❌
+80 > 60 ✅
+65 > 60 ✅
+90 > 60 ✅
+40 > 60 ❌
+
+Result:
+
+80, 65, 90
+
+
+5. Common LINQ Operations
+
+Method                 Use
+------------------------------------------------
+Where()                Filter data
+Select()               Select required data
+OrderBy()              Sort ascending
+OrderByDescending()    Sort descending
+First()                Get first item
+Count()                Count items
+Sum()                  Calculate total
+Average()              Calculate average
+
+
+Example:
+
+var result = students
+                .Where(s => s.Marks >= 70)
+                .OrderBy(s => s.Name)
+                .Select(s => s.Name);
+
+Meaning:
+
+Where()
+   ↓
+Find students with marks >= 70
+
+OrderBy()
+   ↓
+Sort by name
+
+Select()
+   ↓
+Take only student names
+
+
+6. LINQ with Database
+
+LINQ can also be used with databases through technologies such as
+LINQ to SQL and Entity Framework.
+
+For example:
+
+var students = db.Students
+                 .Where(s => s.Marks > 70)
+                 .ToList();
+
+This means:
+
+Get students from the database whose marks are greater than 70.
+
+So:
+
+ASP.NET Application
+       ↓
+      LINQ
+       ↓
+   Database
+       ↓
+ Required Data
+
+
+7. Advantages of LINQ in ASP.NET
+
+1. Easy to write
+
+LINQ uses C# syntax, so queries are easy to understand.
+
+
+2. Less code
+
+We can perform filtering, sorting, and searching with fewer lines.
+
+
+3. Type safety
+
+Errors related to data types can often be detected during
+compilation.
+
+
+4. Easy data manipulation
+
+LINQ can filter, sort, group, select, and calculate data.
+
+
+5. Works with different data sources
+
+- Collections
+- Arrays
+- Objects
+- XML
+- Databases
+
+
+6. Better readability
+
+LINQ queries are generally easier to read than long loops.
+
+
+7. Reusable
+
+LINQ queries can be used in different parts of an application.
+
+
+Remember:
+
+LINQ = Search + Filter + Sort + Select data using C#
+      `
+    },
+    {
+      id: 43,
+      question: "43. What is a Stored Procedure?",
+      answer: "",
+      codeExample: `
+Stored Procedure
+
+Let's understand it in very simple words.
+
+
+1. What is a Stored Procedure?
+
+A Stored Procedure is a pre-written group of SQL statements that is
+saved inside the database.
+
+Instead of writing the same SQL query again and again, we save it in
+the database and call it whenever we need it.
+
+
+Simple idea:
+
+SQL Statements
+      ↓
+Save in Database
+      ↓
+Stored Procedure
+      ↓
+Call whenever required
+
+
+2. Simple Example
+
+Suppose we have a Student table:
+
+Student
+----------------
+Id    Name   Marks
+1     Raj     80
+2     Amit    65
+3     Rahul   90
+
+We want to get students whose marks are greater than 70.
+
+We can create a stored procedure:
+
+CREATE PROCEDURE GetStudents
+AS
+BEGIN
+    SELECT * FROM Student
+    WHERE Marks > 70;
+END
+
+Now the procedure is saved in the database.
+
+We can call it:
+
+EXEC GetStudents;
+
+
+Result:
+
+Raj      80
+Rahul    90
+
+
+3. Stored Procedure with Parameter
+
+We can also pass a value to a stored procedure.
+
+CREATE PROCEDURE GetStudentById
+    @Id INT
+AS
+BEGIN
+    SELECT * FROM Student
+    WHERE Id = @Id;
+END
+
+Call it:
+
+EXEC GetStudentById @Id = 1;
+
+
+Result:
+
+1    Raj    80
+
+Here:
+
+@Id = 1
+   ↓
+Stored Procedure
+   ↓
+Find Student whose Id = 1
+      `
+    },
+    {
+      id: 44,
+      question: "44. Explain how to work with XML data in ASP.NET.",
+      answer: "",
+      codeExample: `
+Working with XML Data in ASP.NET
+
+Let's understand this in very simple words.
+
+
+1. What is XML?
+
+XML stands for Extensible Markup Language.
+
+XML is used to store and exchange data in a structured format.
+
+Example:
+
+<Students>
+    <Student>
+        <Id>1</Id>
+        <Name>Raj</Name>
+        <Marks>80</Marks>
+    </Student>
+
+    <Student>
+        <Id>2</Id>
+        <Name>Amit</Name>
+        <Marks>75</Marks>
+    </Student>
+</Students>
+
+Here XML stores student information.
+
+
+2. How ASP.NET Works with XML
+
+ASP.NET can:
+
+1. Create XML data
+2. Read XML data
+3. Modify XML data
+4. Delete XML data
+5. Display XML data on a web page
+
+
+Simple flow:
+
+XML File
+   ↓
+ASP.NET Application
+   ↓
+Read / Modify / Save
+   ↓
+Web Page
+
+
+3. Reading XML Data
+
+Suppose we have Students.xml:
+
+<Students>
+    <Student>
+        <Id>1</Id>
+        <Name>Raj</Name>
+    </Student>
+
+    <Student>
+        <Id>2</Id>
+        <Name>Amit</Name>
+    </Student>
+</Students>
+
+In C#, we can read it using XmlDocument.
+
+XmlDocument doc = new XmlDocument();
+
+doc.Load(Server.MapPath("Students.xml"));
+
+
+What happens?
+
+Students.xml
+     ↓
+XmlDocument
+     ↓
+XML loaded into memory
+
+
+4. Reading XML Values
+
+We can find XML nodes using XPath.
+
+XmlNodeList students =
+    doc.SelectNodes("/Students/Student");
+
+foreach (XmlNode student in students)
+{
+    string name = student["Name"].InnerText;
+
+    Response.Write(name + "<br>");
+}
+
+Output:
+
+Raj
+Amit
+
+
+5. Creating XML Data
+
+ASP.NET can also create XML.
+
+XmlDocument doc = new XmlDocument();
+
+XmlElement root = doc.CreateElement("Students");
+
+XmlElement student = doc.CreateElement("Student");
+
+XmlElement name = doc.CreateElement("Name");
+name.InnerText = "Raj";
+
+student.AppendChild(name);
+root.AppendChild(student);
+
+doc.AppendChild(root);
+
+This creates:
+
+<Students>
+    <Student>
+        <Name>Raj</Name>
+    </Student>
+</Students>
+
+
+6. Modifying XML
+
+Suppose XML contains:
+
+<Name>Raj</Name>
+
+We can change it:
+
+XmlNode node =
+    doc.SelectSingleNode("/Students/Student/Name");
+
+node.InnerText = "Rahul";
+
+Now:
+
+<Name>Rahul</Name>
+
+
+7. Saving XML
+
+After making changes:
+
+doc.Save(Server.MapPath("Students.xml"));
+
+The modified XML is saved back to the file.
+
+
+8. Important Classes for XML
+
+Class          Use
+------------------------------------------------
+XmlDocument    Load and modify XML
+XmlNode        Represents an XML node
+XmlElement     Represents an XML element
+XmlNodeList    Collection of XML nodes
+XmlReader      Read XML efficiently
+XmlWriter      Write XML data
+XDocument      Modern LINQ-based XML handling
+      
+      `
+    },
+    {
+      id: 45,
+      question: "45. What is CAPTCHA Control? Explain its purpose and working.",
+      answer: "",
+      codeExample: `
+CAPTCHA Control in ASP.NET
+
+Let's understand it in very simple words.
+
+
+1. What is CAPTCHA?
+
+CAPTCHA is a security technique used on websites to check whether
+the user is a human or an automated program (bot).
+
+CAPTCHA commonly asks the user to enter characters shown in an image.
+
+Example:
+
++-------------------+
+|   A7K9P           |  ← CAPTCHA image
++-------------------+
+
+Enter CAPTCHA: [ A7K9P ]
+
+          [ Submit ]
+
+
+If the user enters the correct characters → Allowed
+
+If the characters are wrong → Rejected
+
+
+2. Working of CAPTCHA
+
+The working is simple:
+
+User opens webpage
+       ↓
+CAPTCHA is generated
+       ↓
+Random characters/image shown
+       ↓
+User enters characters
+       ↓
+System checks the answer
+       ↓
+   ┌───────────────┐
+   │ Correct?      │
+   └───────────────┘
+      ↓         ↓
+     YES        NO
+      ↓         ↓
+  Continue    Reject
+
+
+3. Why CAPTCHA is Used?
+
+CAPTCHA helps protect websites from:
+
+- Spam
+- Automated form submissions
+- Fake registrations
+- Bot attacks
+- Repeated automated requests
+
+
+4. CAPTCHA in ASP.NET
+
+In ASP.NET, CAPTCHA functionality can be implemented using a
+CAPTCHA library/control or a CAPTCHA service.
+
+A typical CAPTCHA control may look like:
+
+<asp:Captcha
+    ID="Captcha1"
+    runat="server">
+</asp:Captcha>
+
+The exact control depends on the CAPTCHA library being used.
+
+
+5. Advantages
+
+1. Prevents automated bots.
+
+2. Reduces spam.
+
+3. Protects registration forms.
+
+4. Helps prevent fake submissions.
+
+5. Improves website security.
+
+
+Easy Definition for Exam
+
+CAPTCHA is a security mechanism used to determine whether a user is
+a human or a computer program. It usually asks the user to identify
+characters, images, or other challenges before allowing an operation.
+
+
+Easy memory trick:
+
+CAPTCHA = Human or Bot?
+             ↓
+       Human → Allowed
+       Bot   → Rejected
+      `
+    },
+    {
+      id: 46,
+      question: "46. What is MVC? Explain the Model-View-Controller architecture with a neat diagram.",
+      answer: "",
+      codeExample: `
+MVC in ASP.NET
+
+Let's understand MVC in very simple words.
+
+
+1. What is MVC?
+
+MVC stands for:
+
+M — Model
+V — View
+C — Controller
+
+MVC is a software architectural pattern used to divide an
+application into three separate parts.
+
+The main purpose is to separate data, user interface, and
+application logic.
+
+
+2. MVC Architecture
+
+                 USER
+                   |
+                   ↓
+             ┌───────────┐
+             │ Controller│
+             └─────┬─────┘
+                   |
+          ┌────────┴────────┐
+          ↓                 ↓
+     ┌─────────┐       ┌─────────┐
+     │  Model  │       │  View   │
+     └────┬────┘       └────▲────┘
+          |                 |
+          ↓                 |
+       Database             |
+          |                 |
+          └─────────────────┘
+
+
+Simple flow:
+
+User
+ ↓
+Controller
+ ↓
+Model
+ ↓
+Database
+ ↓
+Model
+ ↓
+Controller
+ ↓
+View
+ ↓
+User
+
+
+3. Model
+
+What is Model?
+
+Model represents the data and business logic of the application.
+
+It communicates with the database and performs operations on data.
+
+Example:
+
+Student
+----------------
+Id
+Name
+Marks
+
+The Model can perform:
+
+- Get student
+- Add student
+- Update student
+- Delete student
+
+Easy meaning:
+
+Model = Data + Business Logic
+
+
+4. View
+
+What is View?
+
+View is the user interface (UI) that the user sees.
+
+It displays information to the user.
+
+Examples:
+
+Student List
+-------------------
+ID     Name    Marks
+1      Raj      80
+2      Amit     75
+
+The View can contain:
+
+- HTML
+- CSS
+- Razor syntax
+- Forms
+- Buttons
+- Tables
+
+Easy meaning:
+
+View = What the user sees
+
+
+5. Controller
+
+What is Controller?
+
+Controller acts as a middleman between Model and View.
+
+It receives the user's request, calls the required Model, and sends
+the result to the View.
+
+Example:
+
+User clicks:
+"Show Students"
+        ↓
+Controller
+        ↓
+Model
+        ↓
+Database
+        ↓
+Model returns data
+        ↓
+Controller
+        ↓
+View
+        ↓
+Student list displayed
+
+Easy meaning:
+
+Controller = Handles requests and controls the flow
+
+
+6. Real-Life Example
+
+Think about a restaurant.
+
+Customer
+   ↓
+Waiter
+   ↓
+Kitchen
+   ↓
+Food
+
+In MVC:
+
+User
+   ↓
+Controller
+   ↓
+Model
+   ↓
+Database
+
+And then the result is shown through the View.
+
+
+MVC Part       Simple Example
+------------------------------------------
+Model          Kitchen / Data
+View           Food shown to customer
+Controller     Waiter who handles the request
+
+
+7. Advantages of MVC
+
+1. Separation of concerns
+
+Data, UI, and control logic are separated.
+
+
+2. Easy maintenance
+
+Changes in one part have less effect on other parts.
+
+
+3. Reusability
+
+Models and other components can be reused.
+
+
+4. Easy testing
+
+Business logic can be tested separately.
+
+
+5. Team development
+
+Different developers can work on Model, View, and Controller
+separately.
+
+
+6. Better organization
+
+The application structure becomes clean and organized.
+      
+      `
+    },
+    {
+      id: 1,
+      question: "1. ",
+      answer: "",
+      codeExample: ``
+    },
+    {
+      id: 1,
+      question: "1. ",
+      answer: "",
+      codeExample: ``
+    },
+    {
+      id: 1,
+      question: "1. ",
+      answer: "",
+      codeExample: ``
+    },
+    {
       id: 1,
       question: "1. ",
       answer: "",
